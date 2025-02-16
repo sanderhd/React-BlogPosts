@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./Home";
+import Blog from "./Blog";
 
-function NewPostButton({ onNewPost }) {
-  function handleClick() {
-    const title = prompt('Enter the title of your new post:');
-    const content = prompt('Enter the content of your new post:');
-    onNewPost(title, content);
-  }
+function App() {
   return (
-    <button onClick={handleClick}>
-      Create a new Post
-    </button>
+    <Router>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/blog">Blog</Link></li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<Blog />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default function MyApp() {
-  const [post, setPost] = useState({ title: '', content: '' });
-
-  function handleNewPost(title, content) {
-    setPost({ title, content });
-  }
-
-  return (
-    <div>
-      <h1 className="head">Sander's Blog Post</h1>
-      <h2 className="head">{post.title}</h2>
-      <h3 className="head">{post.content}</h3>
-      <NewPostButton onNewPost={handleNewPost} />
-    </div>
-  );
-}
+export default App;

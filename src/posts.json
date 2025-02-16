@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "title": "Mijn eerste blogpost",
+      "author": "Sander",
+      "content": "Dit is de eerste blogpost in mijn React-app!",
+      "date": "2025-02-16"
+    },
+    {
+      "id": 2,
+      "title": "React is geweldig",
+      "author": "Sander",
+      "content": "React maakt het bouwen van UI's veel eenvoudiger.",
+      "date": "2025-02-17"
+    }
+  ]
+  
