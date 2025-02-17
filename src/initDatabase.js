@@ -4,6 +4,8 @@ const db = new sqlite3.Database("database.db");
 
 db.serialize(() => {
   db.run("CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY, title TEXT, author TEXT, content TEXT, date TEXT)");
+  db.run("CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY, post_id INTEGER, author TEXT, content TEXT, date TEXT)");
+  db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, email TEXT, password TEXT)");
 
   console.log("Database en tabel aangemaakt!");
 });

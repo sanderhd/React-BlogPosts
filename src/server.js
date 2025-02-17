@@ -22,15 +22,53 @@ app.post("/posts", (req, res) => {
   const { title, author, content } = req.body;
   const date = new Date().toISOString().split("T")[0];
 
-  db.run("INSERT INTO posts (title, author, content, date) VALUES (?, ?, ?, ?)", 
-    [title, author, content, date], 
+  db.run(
+    "INSERT INTO posts (title, author, content, date) VALUES (?, ?, ?, ?)",
+    [title, author, content, date],
     function (err) {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
       }
       res.json({ id: this.lastID, title, author, content, date });
-  });
+    }
+  );
+});
+
+app.post("/signup", (req, res) => {
+  const { email, password } = req.body;
+
+  db.run(
+    "INSERT INTO users (email, password) VALUES (?, ?)",
+    [email, password],
+    function (err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ id: this.lastID, email });
+    }
+  );
+});
+
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  db.get(
+    "SELECT * FROM users WHERE email = ? AND password = ?",
+    [email, password],
+    (err, row) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      if (!row) {
+        res.status(401).json({ error: "Invalid email or password" });
+        return;
+      }
+      res.json({ id: row.id, email: row.email });
+    }
+  );
 });
 
 app.listen(5000, () => console.log("Server draait op poort 5000"));
