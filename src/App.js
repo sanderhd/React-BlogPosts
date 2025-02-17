@@ -8,12 +8,28 @@ import Login from "./auth/login";
 function App() {
   return (
     <Router>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/blog">Blog</Link></li>
-          <li><Link to="/signup">Sign Up</Link></li>
-          <li><Link to="/login">Log In</Link></li>
+      <nav className="bg-white-300 p-4">
+        <ul className="flex space-x-4">
+          <li>
+            <Link to="/" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/blog" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              Blog
+            </Link>
+          </li>
+          <li>
+            <Link to="/signup" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              Sign Up
+            </Link>
+          </li>
+          <li>
+            <Link to="/login" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              Log In
+            </Link>
+          </li>
         </ul>
       </nav>
 
