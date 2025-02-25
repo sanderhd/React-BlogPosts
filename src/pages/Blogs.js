@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Button from "../components/Buttons/ReadMoreButton"
 
 function Blogs() {
   const [posts, setPosts] = useState([]);
@@ -32,6 +33,7 @@ function Blogs() {
                 <strong>By:</strong> {post.author} - <em>{post.date}</em>
               </p>
               <p className="text-white">{post.content}</p>
+              <Button />
             </div>
           ))
         )}
