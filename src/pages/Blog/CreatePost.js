@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-function Blog() {
-  const [posts, setPosts] = useState([]);
+function CreatePost() {
   const [newPost, setNewPost] = useState({ title: "", author: "", content: "" });
-
-  useEffect(() => {
-    fetch("http://localhost:5000/posts")
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
-  }, []);
 
   const handleChange = (e) => {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
@@ -22,16 +15,14 @@ function Blog() {
       body: JSON.stringify(newPost),
     })
       .then((res) => res.json())
-      .then((post) => setPosts([...posts, post]));
-
-    setNewPost({ title: "", author: "", content: "" });
+      .then(() => setNewPost({ title: "", author: "", content: "" }));
   };
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
       <div className="sm:mx-auto sm:w-full sm:max-w-lg">
         <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-white">
-          Blog Posts
+          Create New Post
         </h2>
       </div>
 
@@ -97,20 +88,8 @@ function Blog() {
           </div>
         </form>
       </div>
-
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
-        {posts.map((post) => (
-          <div key={post.id} className="border-b pb-4 mb-4">
-            <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
-            <p className="text-gray-400">
-              <strong>By:</strong> {post.author} - <em>{post.date}</em>
-            </p>
-            <p className="text-white">{post.content}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
 
-export default Blog;
+export default CreatePost;
