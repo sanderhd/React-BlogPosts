@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [users, setUsers] = useState([]);
     const [newUser, setNewUser] = useState({ email: "", password: "" });
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:5000/users")
@@ -14,14 +16,22 @@ function Login() {
         setNewUser({ ...newUser, [e.target.name]: e.target.value });
     }
 
-    const addUser = () => {
+    const addUser = (e) => {
+        e.preventDefault();
+        console.log("Login form submitted", newUser);
         fetch("http://localhost:5000/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newUser),
+            credentials: 'include'
         })
             .then((res) => res.json())
-            .then((user) => setUsers([...users, user]));
+            .then((user) => {
+                setUsers([...users, user]);
+                navigate("/dashboard");
+                alert("Login successful!");
+            })
+            .catch((err) => console.error("Error logging in:", err));
 
         setNewUser({ email: "", password: "" });
     };

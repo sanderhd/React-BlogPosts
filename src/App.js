@@ -5,7 +5,7 @@ import Footer from "./components/footer";
 import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
 import Blog from "./pages/Blog/Blog";
-import CreatePost from "./pages/Blog/CreatePost";
+import CreatePost from "./pages/CreatePost";
 import Dashboard from "./pages/auth/Dashboard";
 import SignUp from "./pages/auth/signup";
 import Login from "./pages/auth/login";

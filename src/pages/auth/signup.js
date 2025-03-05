@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 function SignUp() {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5000/users")
@@ -14,16 +15,27 @@ function SignUp() {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
-  const addUser = () => {
+  const addUser = (e) => {
+    e.preventDefault();
+    console.log("SignUp form submitted", newUser);
     fetch("http://localhost:5000/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser),
     })
-      .then((res) => res.json())
-      .then((user) => setUsers([...users, user]));
-
-    setNewUser({ email: "", password: "" });
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((err) => { throw new Error(err.error); });
+        }
+        return res.json();
+      })
+      .then((user) => {
+        setUsers([...users, user]);
+        setNewUser({ email: "", password: "" });
+        setError("");
+        alert("Sign up successful!");
+      })
+      .catch((err) => setError(err.message));
   };
 
   return (
@@ -79,6 +91,12 @@ function SignUp() {
               />
             </div>
           </div>
+
+          {error && (
+            <div className="text-red-500 text-sm">
+              {error}
+            </div>
+          )}
 
           <div>
             <button
