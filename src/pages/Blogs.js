@@ -8,10 +8,10 @@ function Blogs() {
     fetch("http://localhost:5000/posts")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched posts:", data); // Debugging log
+        console.log("Fetched posts:", data); // debug voor posts ophalen
         setPosts(data);
       })
-      .catch((error) => console.error("Error fetching posts:", error)); // Error handling
+      .catch((error) => console.error("Error fetching posts:", error)); 
   }, []);
 
   return (
@@ -23,14 +23,14 @@ function Blogs() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
-        {posts.length === 0 ? ( // Check if there are no posts
-          <p className="text-center text-white">No posts available.</p>
+        {posts.length === 0 ? ( 
+          <p className="text-center text-white">Momenteel zijn er geen posts beschikbaar.</p>
         ) : (
           posts.map((post) => (
             <div key={post.id} className="border-b pb-4 mb-4">
               <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
               <p className="text-gray-400">
-                <strong>By:</strong> {post.author} - <em>{post.date}</em>
+                <strong>Autheur:</strong> {post.author} - <em>{post.date}</em>
               </p>
               <p className="text-white">{post.content}</p>
               <Button />

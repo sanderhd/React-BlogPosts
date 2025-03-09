@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Button from "../components/Buttons/ReadMoreButton";
 
 function LatestPost() {
     const [latestPost, setLatestPost] = useState(null);
@@ -15,14 +16,15 @@ function LatestPost() {
 
     return (
         <div>
-            <div className="p-6">
+            <div className="p-6 bg-gray-900 text-white flex flex-col items-center justify-center w-full">
                 <h2 className="text-3xl font-bold">Laatste blogpost</h2>
                 {latestPost ? (
                     <div className="mt-4 p-4 border rounded-lg shadow">
                         <h3 className="text-2xl font-semibold">{latestPost.title}</h3>
                         <p className="text-gray-600">Auteur: {latestPost.author}</p>
-                        <p className="text-gray-800 mt-2">{latestPost.content}</p>
+                        <p className="text-white mt-2">{latestPost.content}</p>
                         <p className="text-sm text-gray-500">Datum: {latestPost.date}</p>
+                        <Button />
                     </div>
                 ) : (
                     <p className="text-gray-500">Laden...</p>

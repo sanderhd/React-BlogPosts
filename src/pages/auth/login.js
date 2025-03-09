@@ -7,7 +7,9 @@ function Login() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:5000/users")
+        fetch("http://localhost:5000/users", {
+            credentials: 'include'
+        })
             .then((res) => res.json())
             .then((data) => setUsers(data));
     }, []);
@@ -25,13 +27,19 @@ function Login() {
             body: JSON.stringify(newUser),
             credentials: 'include'
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((err) => { throw new Error(err.error); });
+                }
+                return res.json();
+            })
             .then((user) => {
                 setUsers([...users, user]);
+                localStorage.setItem("userEmail", user.email);
                 navigate("/dashboard");
                 alert("Login successful!");
             })
-            .catch((err) => console.error("Error logging in:", err));
+            .catch((err) => alert(err.message));
 
         setNewUser({ email: "", password: "" });
     };

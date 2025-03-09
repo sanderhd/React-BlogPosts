@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function CreatePost() {
   const [post, setPost] = useState({ title: "", author: "", content: "" });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem('userEmail');
+    if (userEmail) {
+      setPost((prevPost) => ({ ...prevPost, author: userEmail }));
+    } else {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
@@ -17,9 +26,8 @@ function CreatePost() {
       body: JSON.stringify(post),
     })
       .then((res) => res.json())
-      .then(() => {
-        navigate("/dashboard");
-        alert("Post created successfully!");
+      .then((data) => {
+        navigate(`/blog/${data.id}`);
       })
       .catch((err) => console.error("Error creating post:", err));
   };
@@ -40,22 +48,6 @@ function CreatePost() {
                   name="title"
                   id="title"
                   value={post.title}
-                  onChange={handleChange}
-                  required
-                  className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline outline-1 outline-gray-700 placeholder:text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="author" className="block text-sm font-medium text-white">
-                Author
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="author"
-                  id="author"
-                  value={post.author}
                   onChange={handleChange}
                   required
                   className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline outline-1 outline-gray-700 placeholder:text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 sm:text-sm"

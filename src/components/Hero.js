@@ -22,7 +22,7 @@ return (
                     to="/signup"
                     className="px-6 py-3 bg-gray-600 transition rounded-lg text-white text-lg font-semibold"
                 >
-                    Schrijf Je In
+                    Registreer
                 </Link>
             </div>
         </div>

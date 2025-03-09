@@ -6,13 +6,19 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    if (!userEmail) {
+      navigate("/login");
+      return;
+    }
+
     fetch("http://localhost:5000/session", {
       credentials: 'include'
     })
       .then((res) => res.json())
       .then((data) => setUser(data))
       .catch((err) => console.error("Error fetching session:", err));
-  }, []);
+  }, [navigate]);
 
   const handleLogout = () => {
     fetch("http://localhost:5000/logout", {
@@ -21,6 +27,7 @@ function Dashboard() {
     })
       .then((res) => res.json())
       .then(() => {
+        localStorage.removeItem("userEmail");
         navigate("/login");
         alert("Logout successful!");
       })
@@ -36,7 +43,7 @@ function Dashboard() {
       <div className="container mx-auto py-12">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
-          {user ? <p className="text-xl mb-8">Welcome, {user.email}!</p> : <p className="text-xl mb-8">Loading...</p>}
+          {user ? <p className="text-xl mb-8">Welcome, {user.email}!</p> : <p className="text-xl mb-8">Not logged in, sending to home page.</p>}
           <button
             onClick={handleCreatePost}
             className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-4 rounded-md shadow-md"

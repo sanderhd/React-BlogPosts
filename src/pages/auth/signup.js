@@ -33,6 +33,7 @@ function SignUp() {
         setUsers([...users, user]);
         setNewUser({ email: "", password: "" });
         setError("");
+        localStorage.setItem("userEmail", user.email);
         alert("Sign up successful!");
       })
       .catch((err) => setError(err.message));
