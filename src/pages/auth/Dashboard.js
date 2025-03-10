@@ -39,22 +39,22 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="bg-gray-900 text-white justify-center items-center flex">
       <div className="container mx-auto py-12">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
-          {user ? <p className="text-xl mb-8">Welcome, {user.email}!</p> : <p className="text-xl mb-8">Not logged in, sending to home page.</p>}
+          {user ? <p className="text-xl mb-8">Welkom, {user.email}!</p> : <p className="text-xl mb-8">Not logged in, sending to home page.</p>}
           <button
             onClick={handleCreatePost}
             className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-4 rounded-md shadow-md"
           >
-            Create Post
+            Post aanmaken
           </button>
           <button
             onClick={handleLogout}
             className="ml-4 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 rounded-md shadow-md"
           >
-            Logout
+            Uitloggen
           </button>
         </div>
       </div>

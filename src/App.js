@@ -9,12 +9,13 @@ import CreatePost from "./pages/CreatePost";
 import Dashboard from "./pages/auth/Dashboard";
 import SignUp from "./pages/auth/signup";
 import Login from "./pages/auth/login";
+import "./Styles/style.css"
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        <Navbar /> {/* Nieuwe navbar-component */}
+        <Navbar />
 
         <div className="flex-grow">
           <Routes>

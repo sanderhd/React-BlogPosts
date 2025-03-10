@@ -121,4 +121,38 @@ app.get("/users", (req, res) => {
   });
 });
 
+app.post("/comments", (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+
+  const { postId, content } = req.body;
+  const date = new Date().toISOString().split("T")[0];
+  const userId = req.session.user.id;
+
+  db.run(
+    "INSERT INTO comments (post_id, author, content, date) VALUES (?, ?, ?, ?)",
+    [postId, userId, content, date],
+    function (err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ id: this.lastID, postId, userId, content, date });
+    }
+  );
+});
+
+app.get("/comments/:postId", (req, res) => {
+  const { postId } = req.params;
+
+  db.all("SELECT * FROM comments WHERE post_id = ?", [postId], (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
 app.listen(5000, () => console.log("Server draait op poort 5000"));

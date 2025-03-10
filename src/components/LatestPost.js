@@ -15,8 +15,8 @@ function LatestPost() {
     }, []);
 
     return (
-        <div>
-            <div className="p-6 bg-gray-900 text-white flex flex-col items-center justify-center w-full">
+        <div className="flex justify-center items-center">
+            <div className="p-6 bg-gray-900 text-white flex flex-col justify-center items-center w-150">
                 <h2 className="text-3xl font-bold">Laatste blogpost</h2>
                 {latestPost ? (
                     <div className="mt-4 p-4 border rounded-lg shadow">
@@ -27,7 +27,9 @@ function LatestPost() {
                         <Button />
                     </div>
                 ) : (
-                    <p className="text-gray-500">Laden...</p>
+                    <div>
+                        <p className="text-gray-500 text-center">Geen blogposts gevonden</p>
+                    </div>
                 )}
             </div>
         </div>

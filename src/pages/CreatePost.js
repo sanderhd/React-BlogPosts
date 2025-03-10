@@ -33,7 +33,7 @@ function CreatePost() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="m-10 bg-gray-900 text-white">
       <div className="container mx-auto py-12">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Create Post</h1>
