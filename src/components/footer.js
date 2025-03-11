@@ -8,7 +8,7 @@ function Footer() {
                 {/* Logo & Copyright */}
                 <div>
                     <h2 className="text-lg font-bold">SANDER HOUDIJK</h2>
-                    <p className="text-gray-400">&copy; sanderhd.me 2025 - All rights reserved</p>
+                    <p className="text-gray-400">&copy; <a href="https://sanderhd.me/">sanderhd.me</a> 2025 - All rights reserved</p>
                 </div>
 
                 {/* About Us */}

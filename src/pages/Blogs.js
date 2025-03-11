@@ -33,7 +33,7 @@ function Blogs() {
                 <strong>Autheur:</strong> {post.author} - <em>{post.date}</em>
               </p>
               <p className="text-white">{post.content}</p>
-              <Button />
+              <Button postId={post.id} />
             </div>
           ))
         )}

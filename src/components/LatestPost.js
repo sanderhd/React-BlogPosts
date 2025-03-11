@@ -24,7 +24,7 @@ function LatestPost() {
                         <p className="text-gray-600">Auteur: {latestPost.author}</p>
                         <p className="text-white mt-2">{latestPost.content}</p>
                         <p className="text-sm text-gray-500">Datum: {latestPost.date}</p>
-                        <Button />
+                        <Button postId={latestPost.id} />
                     </div>
                 ) : (
                     <div>
