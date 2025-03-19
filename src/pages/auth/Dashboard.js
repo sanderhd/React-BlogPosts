@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from "../../components/Buttons/ReadMoreButton"
+import DeleteButton from "../../components/Buttons/DeleteButton"
 
 function Dashboard() {
   const [user, setUser] = useState(null);
+  const [userEmail, setUserEmail] = useState('');
   const [userPosts, setUserPosts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userEmail = localStorage.getItem("userEmail");
-    if (!userEmail) {
+    const email = localStorage.getItem("userEmail");
+    if (!email) {
       navigate("/login");
       return;
     }
+    setUserEmail(email);
 
     fetch("http://localhost:5000/session", {
       credentials: 'include',
@@ -23,7 +26,6 @@ function Dashboard() {
   }, [navigate]);
 
   useEffect(() => {
-    const userEmail = localStorage.getItem("userEmail");
     if (userEmail) {
       fetch("http://localhost:5000/posts")
         .then((res) => res.json())
@@ -33,7 +35,7 @@ function Dashboard() {
         })
         .catch((error) => console.error("Error fetching posts:", error));
     }
-  }, [user]);
+  }, [userEmail]);
 
   const handleLogout = () => {
     fetch("http://localhost:5000/logout", {
@@ -58,7 +60,7 @@ function Dashboard() {
       <div className="container mx-auto py-12">
         <div className="text-center mt-12">
           <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
-          {user ? <p className="text-xl mb-8">Welkom, {user.email}!</p> : <p className="text-xl mb-8">Not logged in, sending to home page.</p>}
+          <p className="text-xl mb-8">Welkom, {userEmail}!</p>
           <button
             onClick={handleCreatePost}
             className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-4 rounded-md shadow-md"
@@ -83,6 +85,7 @@ function Dashboard() {
               <div key={post.id} className="mx-4">
                 <h2 className="text-1xl font-semibold">{post.title}</h2>
                 <a><Button postId={post.id}/></a>
+                <a><DeleteButton postId={post.id} /></a>
               </div>
             ))
           )}

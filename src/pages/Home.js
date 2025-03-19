@@ -4,8 +4,8 @@ import LatestPost from "../components/LatestPost";
 
 function Home() {
     return (
-        <div>
-            <Hero />
+        <div className="flex flex-col items-center">
+            <Hero />    
             <div className="mt-12">
                 <LatestPost />
             </div>

@@ -93,7 +93,7 @@ function Blog() {
           comments.map((comment) => (
             <div key={comment.id} className="mb-4 p-4 bg-gray-700 rounded-lg">
               <p className="text-lg">{comment.content}</p>
-              <p className="text-sm text-gray-400">Author: {comment.author}</p>
+              <p className="text-sm text-gray-400">Author: {comment.authorName}</p>
               <p className="text-sm text-gray-400">Date: {comment.date}</p>
             </div>
           ))

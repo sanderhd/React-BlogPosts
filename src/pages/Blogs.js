@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Button from "../components/Buttons/ReadMoreButton"
+import Button from "../components/Buttons/ReadMoreButton";
 
 function Blogs() {
   const [posts, setPosts] = useState([]);
@@ -11,7 +11,7 @@ function Blogs() {
         console.log("Fetched posts:", data); // debug voor posts ophalen
         setPosts(data);
       })
-      .catch((error) => console.error("Error fetching posts:", error)); 
+      .catch((error) => console.error("Error fetching posts:", error));
   }, []);
 
   return (
@@ -23,16 +23,16 @@ function Blogs() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
-        {posts.length === 0 ? ( 
+        {posts.length === 0 ? (
           <p className="text-center text-white">Momenteel zijn er geen posts beschikbaar.</p>
         ) : (
           posts.map((post) => (
-            <div key={post.id} className="border-b pb-4 mb-4">
+            <div key={post.id} className="border-2 border-white rounded-lg p-6 mb-6">
               <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
               <p className="text-gray-400">
                 <strong>Autheur:</strong> {post.author} - <em>{post.date}</em>
               </p>
-              <p className="text-white">{post.content}</p>
+              <p className="text-white mt-4">{post.content}</p>
               <Button postId={post.id} />
             </div>
           ))
